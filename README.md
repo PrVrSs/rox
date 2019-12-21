@@ -2,13 +2,13 @@
 
 [lox](https://github.com/munificent/craftinginterpreters) *implementation*
 
-##Getting started
+## Getting started
 
-####Running
+#### Running
 
 `cargo run`
 
-####test
+#### test
 
 `cargo test`
 
