@@ -1,26 +1,9 @@
 use std::collections::HashMap;
 use std::iter;
-use std::fmt;
-use std::result;
 use std::str;
 
 use crate::token::{TokenType, Token, Literal};
-
-#[derive(Debug)]
-pub enum Error {
-    Scanner(u64, char),
-}
-
-impl fmt::Display for Error {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match *self {
-            Error::Scanner(ref line, ref msg) =>
-                write!(f, "{}: {}", line, msg),
-        }
-    }
-}
-
-pub type Result<T> = result::Result<T, Error>;
+use crate::error::{Result, Error};
 
 #[derive(Debug)]
 pub struct Scanner<'a> {
@@ -90,12 +73,12 @@ impl <'a>Scanner<'a> {
     fn skip_whitespace(&mut self) {
         while let Some(&symbol) = self.src.peek() {
             if !symbol.is_whitespace() {
-                        break;
-                    } else if symbol == '\n' {
-                        self.line += 1;
-                    }
+                    break;
+                } else if symbol == '\n' {
+                    self.line += 1;
+                }
 
-                    self.src.next();
+                self.src.next();
         }
     }
 
@@ -160,7 +143,7 @@ impl <'a>Scanner<'a> {
         }
     }
 
-    fn token(& self, token_type: TokenType) -> Token {
+    fn token(&self, token_type: TokenType) -> Token {
         Token::new(token_type, self.line,None,None)
     }
 
@@ -176,6 +159,7 @@ impl <'a>Scanner<'a> {
             '+' => Ok(self.token(TokenType::PLUS)),
             ';' => Ok(self.token(TokenType::SEMICOLON)),
             '*' => Ok(self.token(TokenType::STAR)),
+            '=' => Ok(self.token(TokenType::EQUAL)),
             _ => self.complex_token(symbol),
         }
     }
