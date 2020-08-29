@@ -1,5 +1,6 @@
 use crate::token::{Token};
 
+
 #[derive(Clone, Debug)]
 pub enum Expr {
     Literal(Token),
@@ -9,6 +10,41 @@ pub enum Expr {
     Unary(Token, Box<Expr>),
     Binary(Box<Expr>, Token, Box<Expr>),
 }
+
+
+impl Expr {
+    pub fn accept<T>(&self, visitor: &mut dyn Visitor<T>) -> T {
+        match self {
+            Expr::Assign(name, variable) => visitor.visit_assign(name, variable),
+            Expr::Variable(name) => visitor.visit_variable(name),
+            Expr::Literal(name) => visitor.visit_literal(name),
+            _ => panic!()
+        }
+    }
+}
+
+
+pub trait Visitor<T> {
+    fn visit_assign(&mut self, name: &Token, value: &Expr) -> T;
+    fn visit_variable(&mut self, name: &Token) -> T;
+    fn visit_literal(&mut self, name: &Token) -> T;
+}
+
+
+// pub trait Acceptor<T> {
+//     fn accept(&self, visitor: &mut dyn Visitor<T>) -> T;
+// }
+//
+//
+// impl<T> Acceptor<T> for Expr {
+//     fn accept(&self, visitor: &mut dyn Visitor<T>) -> T {
+//         match self {
+//             Expr::Assign(name, variable) => visitor.visit_assign(name, variable),
+//             _ => panic!()
+//         }
+//     }
+// }
+
 
 //// The abstract visitor
 //pub trait Visitor<T> {

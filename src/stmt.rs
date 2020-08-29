@@ -5,5 +5,5 @@ use crate::expr::{Expr};
 #[derive(Clone, Debug)]
 pub enum Stmt {
     Empty,
-    Variable(Token,Option<Expr>),
+    Variable(Token, Option<Expr>),
 }

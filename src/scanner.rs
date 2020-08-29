@@ -5,6 +5,7 @@ use std::str;
 use crate::token::{TokenType, Token, Literal};
 use crate::error::{Result, Error};
 
+
 #[derive(Debug)]
 pub struct Scanner<'a> {
     src: iter::Peekable<str::Chars<'a>>,
@@ -13,6 +14,7 @@ pub struct Scanner<'a> {
     eof: bool,
     keywords: HashMap<&'static str, TokenType>,
 }
+
 
 impl <'a>Scanner<'a> {
     pub fn new(c: &'a str) -> Self {

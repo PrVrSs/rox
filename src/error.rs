@@ -17,5 +17,5 @@ impl fmt::Display for Error {
         }
     }
 }
-// TODO: перенести в lox.rs
+
 pub type Result<T> = result::Result<T, Error>;

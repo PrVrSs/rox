@@ -50,13 +50,16 @@ pub enum TokenType {
     EOF
 }
 
+
 #[derive(Clone, Debug, PartialEq)]
 pub enum Literal {
     Str(String),
     Float(f64),
 }
 
+
 impl Eq for Literal {}
+
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub struct Token {
@@ -65,6 +68,7 @@ pub struct Token {
     pub literal: Option<Literal>,
     pub line: u64,
 }
+
 
 impl Default for Token {
     fn default() -> Self {
@@ -77,13 +81,14 @@ impl Default for Token {
     }
 }
 
+
 impl Token {
     pub fn new(
-            token_type: TokenType,
-            line: u64,
-            lexeme: Option<String>,
-            literal: Option<Literal>)
-        -> Self {
+        token_type: TokenType,
+        line: u64,
+        lexeme: Option<String>,
+        literal: Option<Literal>,
+    ) -> Self {
         Token { token_type, line, lexeme, literal, }
     }
 }
