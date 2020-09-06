@@ -1,5 +1,5 @@
 use crate::expr;
-use crate::expr::{Expr, Acceptor};
+use crate::expr::{Expr};
 use crate::token::Token;
 use crate::error::{Result};
 
@@ -21,10 +21,6 @@ impl Interpreter {
 
 impl expr::Visitor<Result<Object>> for Interpreter {
     fn visit_assign(&mut self, name: &Token, value: &Expr) -> Result<Object> {
-        unimplemented!()
-    }
-
-    fn visit_variable(&mut self, name: &Token) -> Result<Object> {
         unimplemented!()
     }
 

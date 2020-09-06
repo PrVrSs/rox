@@ -16,7 +16,6 @@ impl Expr {
     pub fn accept<T>(&self, visitor: &mut dyn Visitor<T>) -> T {
         match self {
             Expr::Assign(name, variable) => visitor.visit_assign(name, variable),
-            Expr::Variable(name) => visitor.visit_variable(name),
             Expr::Literal(name) => visitor.visit_literal(name),
             _ => panic!()
         }
@@ -26,7 +25,6 @@ impl Expr {
 
 pub trait Visitor<T> {
     fn visit_assign(&mut self, name: &Token, value: &Expr) -> T;
-    fn visit_variable(&mut self, name: &Token) -> T;
     fn visit_literal(&mut self, name: &Token) -> T;
 }
 

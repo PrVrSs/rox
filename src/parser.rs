@@ -4,7 +4,7 @@ use crate::stmt::Stmt;
 use crate::expr::Expr;
 
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Parser {
     current: usize,
     tokens: Vec<Token>
